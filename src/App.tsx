@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Arena from './containers/Arena';
+import Banner from './components/shared/Banner';
 import SetPlayer from './components/SetPlayer/SetPlayer';
 
 
@@ -22,6 +23,7 @@ export default class App extends Component<{}, Player> {
   render() {
     return (
       <>
+        <Banner />
         <SetPlayer
           submit={(payload) => this.setPlayer(payload)} />
         <Arena />
