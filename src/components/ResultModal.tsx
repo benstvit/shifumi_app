@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export class ResultModal extends Component {
+export default class ResultModal extends Component {
   state = {}
 
   render () {

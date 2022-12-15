@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 
-interface Avatar {
+interface Modal {
 }
 
-export default class Welcome extends Component<{}, Avatar> {
+export default class Welcome extends Component<{}, Modal> {
   state = {}
 
   render () {

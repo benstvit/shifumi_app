@@ -9,7 +9,7 @@ export default class Welcome extends Component<{}, ArenaState> {
   render () {
     return (
       <>
-        <h1>The Battle Will Take Place Here</h1>
+        <h1>🚧 The Battle Will Take Place Here 🚧</h1>
       </>
     )
   }
