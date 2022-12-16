@@ -1,31 +1,25 @@
-import { useEffect } from 'react';
-import {getAPI} from '../../api/API'
+import { useEffect, useState } from 'react';
+import {GetAvatars, isLoading} from '../../api/getAvatars'
+
+interface AvatarsState {
+  id: number, url: String
+}
 
 export default function SelectAvatar({selectAvatar}: {selectAvatar: any}) {
+  const [avatar, setAvatar] = useState()
 
-  const avatarUrls: Object[] = []
+  useEffect(() =>  {
+    const results = GetAvatars();
+    setAvatar(results);
+    console.log(avatars);
+  }, []);
 
-
-  const getData = () => getAPI(2).then(
-    (results) => {
-      if(results.status === 200){
-        // setData(results.data)
-        console.log(results.data)
-      }else{
-        console.log(results)
-      }
-  })
-
-  useEffect(() => {
-    getData();
-  })
-
-
-
+  // if(isLoading) return <div className="App">Loading...</div>;
   return (
-    <label className="block font-game text-xl font-bold text-gray-900 dark:text-white mb-4">
-      SELECT AVATAR
-
-    </label>
+    <>
+      <label className="block font-game text-xl font-bold text-gray-900 dark:text-white mb-4">
+        SELECT AVATAR
+      </label>
+    </>
   )
 }

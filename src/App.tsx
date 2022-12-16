@@ -25,10 +25,6 @@ export default function App() {
     setPlayerState({player: {...payload}})
   }
 
-  useEffect(() => {
-    console.log(playerState);
-  })
-
   return (
     <>
       <Banner />
