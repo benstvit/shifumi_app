@@ -1,16 +1,13 @@
-import React, {Component} from 'react'
+import {useState} from 'react'
 
 interface ArenaState {
 }
 
-export default class Welcome extends Component<{}, ArenaState> {
-  state = {}
+export default function Arena({}) {
 
-  render () {
     return (
       <>
         <h1>🚧 The Battle Will Take Place Here 🚧</h1>
       </>
     )
   }
-}

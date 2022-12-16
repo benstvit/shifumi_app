@@ -1,12 +1,9 @@
-import React, {Component} from 'react'
+import {useState} from 'react'
 
-export class PlayerVue extends Component {
-  state = {}
+export default function PlayerVue ({}) {
 
-  render () {
     return (
       <>
       </>
     )
   }
-}

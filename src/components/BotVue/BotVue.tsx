@@ -1,12 +1,9 @@
-import React, {Component} from 'react'
+import {useState} from 'react'
 
-export class BotVue extends Component {
-  state = {}
+export default function BotVue ({}) {
 
-  render () {
     return (
       <>
       </>
     )
   }
-}

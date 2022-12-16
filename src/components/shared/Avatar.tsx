@@ -1,15 +1,12 @@
-import React, {Component} from 'react'
+import {useState} from 'react'
 
-interface Avatar {
+interface AvatarState {
 }
 
-export default class Welcome extends Component<{}, Avatar> {
-  state = {}
+export default function Avatar({}) {
 
-  render () {
     return (
       <>
       </>
     )
   }
-}

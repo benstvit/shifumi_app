@@ -1,12 +1,9 @@
-import React, {Component} from 'react'
+import {useState} from 'react'
 
-export class ChoiceVue extends Component {
-  state = {}
+export default function ChoiceVue ({}) {
 
-  render () {
     return (
       <>
       </>
     )
   }
-}

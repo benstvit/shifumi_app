@@ -1,8 +1,5 @@
-import React, {Component} from 'react'
+export default function Banner() {
 
-export default class Banner extends Component<{}> {
-
-  render () {
     return (
       <>
         <div className="bg-blue-300 shadow-md">
@@ -15,4 +12,3 @@ export default class Banner extends Component<{}> {
       </>
     )
   }
-}

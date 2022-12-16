@@ -1,43 +1,41 @@
-import React, {Component} from 'react'
+import {useEffect, useState} from 'react'
 import Arena from './containers/Arena';
 import Banner from './components/shared/Banner';
 import SetPlayer from './components/SetPlayer/SetPlayer';
 
 
-type Player = {
+interface PlayerState {
   player: {
     name: String,
     url: String
   }
 }
 
-export default class App extends Component<{}, Player> {
-
-  state: Player = {
+export default function App() {
+  const player: PlayerState = {
     player: {
       name: '',
       url: ''
     }
   }
 
-  render() {
-    return (
-      <>
-        <Banner />
-        <SetPlayer
-          submit={(payload) => this.setPlayer(payload)} />
-        <Arena />
-      </>
-    )
+  const [playerState, setPlayerState] = useState<PlayerState>(player)
+
+  function setPlayer(payload) {
+    setPlayerState({player: {...payload}})
   }
-  setName(event) {
-    const userInput = event.target.value
-    this.setState(state => ({player: {...state.player, name: userInput }}))
-  }
-  setPlayer(payload ) {
-    this.setState({player: {...payload}})
-  }
-  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<Player>, snapshot?: any): void {
-    console.log(this.state);
-  }
+
+  useEffect(() => {
+    console.log(playerState);
+  })
+
+  return (
+    <>
+      <Banner />
+      <SetPlayer
+        submit={(payload) => setPlayer(payload)} />
+      <Arena />
+    </>
+  )
+
 }
