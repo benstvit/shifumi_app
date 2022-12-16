@@ -1,3 +1,5 @@
+import SelectAvatar from './SelectAvatar'
+
 export default function SetPlayer ({submit}: {submit:any}) {
   const player = {
     player: {
@@ -11,9 +13,9 @@ export default function SetPlayer ({submit}: {submit:any}) {
     player.player.name = userInput
   }
   //TO DO Fetch url from picked avatar
-  // setUrl(event) {
-  //   console.log(event)
-  // }
+  function setUrl(event) {
+    console.log(event)
+  }
 
   function submitResults(event) {
     submit(player.player);
@@ -36,8 +38,9 @@ export default function SetPlayer ({submit}: {submit:any}) {
                 onChange={setName}
               />
             </label>
+            <SelectAvatar select-avatar={setUrl}/>
             <input
-              className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 cursor-pointer hover:border-blue-500 rounded"
+              className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-400 cursor-pointer hover:border-blue-500 rounded"
               type="submit"
               value="Submit"
              />
