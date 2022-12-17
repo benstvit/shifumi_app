@@ -29,7 +29,8 @@ export default function App() {
     <>
       <Banner />
       <SetPlayer
-        submit={(payload) => setPlayer(payload)} />
+        submit={(payload) => setPlayer(payload)}
+        playerState={playerState} />
       <Arena />
     </>
   )

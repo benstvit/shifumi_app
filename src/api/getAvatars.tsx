@@ -13,11 +13,11 @@ function randomId() {
 export const GetAvatars = () => {
     const avatars: Object[] = [];
 
-    randomId().forEach((id, index) => {
-      getAPI(id).then((results) => {
-        const url = results.data.sprites.versions["generation-v"]["black-white"].animated.front_default;
+    randomId().forEach(async (id, index) => {
+      await getAPI(id).then((results) => {
+        const url = results.data.sprites.versions["generation-v"]["black-white"].front_default;
         avatars.push({id: index, imageUrl: url});
-      }).then(() => avatars);
+      });
     })
     isLoading = false;
     return avatars;
