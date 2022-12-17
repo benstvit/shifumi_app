@@ -21,15 +21,20 @@ export default function App() {
 
   const [playerState, setPlayerState] = useState<PlayerState>(player)
 
-  function setPlayer(payload) {
-    setPlayerState({player: {...payload}})
+  function setPlayerName(payload) {
+    console.log(payload);
+    setPlayerState({player: {...player.player, name:payload}})
+  }
+  function setPlayerAvatar(payload) {
+    setPlayerState({player: {...player.player, url: payload}})
   }
 
   return (
     <>
       <Banner />
       <SetPlayer
-        submit={(payload) => setPlayer(payload)}
+        submitName={(payload) => setPlayerName(payload)}
+        submitUrl={(payload) => setPlayerAvatar(payload)}
         playerState={playerState} />
       <Arena />
     </>

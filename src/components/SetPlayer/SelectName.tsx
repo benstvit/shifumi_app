@@ -13,7 +13,7 @@ export default function SelectName({submitName}: {submitName: any}) {
   }
 
   function submitResults(event) {
-    submitName(player.player);
+    submitName(player.player.name);
     event.preventDefault();
   }
 

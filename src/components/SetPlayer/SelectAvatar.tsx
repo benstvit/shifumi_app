@@ -1,32 +1,40 @@
 import { useEffect } from "react";
 
 type Props = {
-  setUrl: Function,
+  submitUrl: Function,
   avatars: any
 }
 
-export default function SelectAvatar({setUrl, avatars}: Props) {
+export default function SelectAvatar({submitUrl, avatars}: Props) {
 
-  useEffect(() => {
-    console.log(avatars);
-  })
-
-  function updatePlayerAvatar(event) {
-    console.log(event)
+  const player = {
+    player: {
+      name: "",
+      url: ""
+    }
   }
 
-  const displayImages = () => {
-    return avatars.map((avatar, index) => {
-      return <span className="hover:cursor-pointer">
-                <img className="h-52 w-52 col-span-2 p-4 hover:cursor-pointer" src={avatar.imageUrl} alt={avatar.id}/>
-            </span>
+  function displayImages() {
+    return avatars.map(avatar => {
+      return <span onClick={setPlayerAvatar} key={avatar.id}><img className="h-52 w-52 col-span-2 p-4 hover:cursor-pointer" src={avatar.imageUrl} alt={avatar.id}/></span>
     })
+  }
+
+  function setPlayerAvatar(event) {
+    player.player.url = event.target.src;
+    console.log(player);
+  }
+
+  function submitResults(event) {
+    submitUrl(player.player.url);
+    event.preventDefault();
   }
 
   return (
     <>
       <form
-        className="flex flex-col justify-center items-center bg-gray-100 rounded-md p-24 shadow-md mt-24">
+        className="flex flex-col justify-center items-center bg-gray-100 rounded-md p-24 shadow-md mt-24"
+        onSubmit={submitResults}>
         <label className="block font-game text-xl font-bold text-gray-900 dark:text-white mb-4">
           SELECT AVATAR
         </label>
@@ -37,7 +45,6 @@ export default function SelectAvatar({setUrl, avatars}: Props) {
         className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-400 cursor-pointer hover:border-blue-500 rounded"
         type="submit"
         value="Submit Avatar Choice"
-        onSubmit={updatePlayerAvatar}
         />
       </form>
     </>
