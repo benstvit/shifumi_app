@@ -8,11 +8,14 @@ type Props = {
 
 export default function SelectAvatar({submitBot, submitUrl, avatars}: Props) {
 
-  const player = {
+  const data = {
     player: {
       name: '',
       frontUrl: '',
       backUrl: ''
+    },
+    bot: {
+      frontUrl: ''
     }
   }
 
@@ -32,19 +35,19 @@ export default function SelectAvatar({submitBot, submitUrl, avatars}: Props) {
   }
 
   function setBotAvatar() {
-    const filtered = avatars.filter(avatar => avatar.frontUrl !== player.player.frontUrl);
+    const filtered = avatars.filter(avatar => avatar.frontUrl !== data.player.frontUrl);
     const randomIndex = Math.floor(Math.random() * filtered.length);
-    return filtered[randomIndex].frontUrl;
+    data.bot.frontUrl = filtered[randomIndex].frontUrl;
   }
 
   function setPlayerAvatar(event) {
-    player.player.frontUrl = event.target.src;
-    player.player.backUrl = event.target.getAttribute("data-backurl");
+    data.player.frontUrl = event.target.src;
+    data.player.backUrl = event.target.getAttribute("data-backurl");
   }
 
   function submitResults(event) {
-    submitBot(setBotAvatar())
-    submitUrl(player.player);
+    setBotAvatar()
+    submitUrl(data);
     event.preventDefault();
   }
 

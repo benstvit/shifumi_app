@@ -47,7 +47,9 @@ export default function App() {
 
   function setPlayer(payload, type) {
     const actualPlayerState = {...GameState.player }
-    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload.frontUrl, backUrl: payload.backUrl} } ;
+    const actualBotState = {...GameState.bot};
+    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload.player.frontUrl, backUrl: payload.player.backUrl}, bot: {...actualBotState, frontUrl: payload.bot.frontUrl} } ;
+    console.log(newState);
     setGameState(newState)
   }
 
@@ -64,7 +66,7 @@ export default function App() {
   } else {
     return (
       <>
-        <div className="flex justify-center items-start h-screen bg-gray-100">
+        <div className="flex justify-center items-center my-auto mx-auto h-full">
           {displayArena() && <Arena gameState={GameState} />}
         </div>
       </>
