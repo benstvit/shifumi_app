@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 
 type Props = {
+  submitBot: Function,
   submitUrl: Function,
   avatars: any
 }
 
-export default function SelectAvatar({submitUrl, avatars}: Props) {
+export default function SelectAvatar({submitBot, submitUrl, avatars}: Props) {
 
   const player = {
     player: {
@@ -30,12 +31,19 @@ export default function SelectAvatar({submitUrl, avatars}: Props) {
     })
   }
 
+  function setBotAvatar() {
+    const filtered = avatars.filter(avatar => avatar.frontUrl !== player.player.frontUrl);
+    const randomIndex = Math.floor(Math.random() * filtered.length);
+    return filtered[randomIndex].frontUrl;
+  }
+
   function setPlayerAvatar(event) {
     player.player.frontUrl = event.target.src;
     player.player.backUrl = event.target.getAttribute("data-backurl");
   }
 
   function submitResults(event) {
+    submitBot(setBotAvatar())
     submitUrl(player.player);
     event.preventDefault();
   }

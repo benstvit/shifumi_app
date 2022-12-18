@@ -4,12 +4,13 @@ import SelectAvatar from './SelectAvatar'
 import SelectName from './SelectName'
 
 type playerProps = {
+  submitBot: any,
   submitName: any,
   submitUrl: any,
   gameState: Object
 }
 
-export default function SetPlayer ({submitName, submitUrl, gameState}: playerProps) {
+export default function SetGame ({submitBot, submitName, submitUrl, gameState}: playerProps) {
   const [avatars, setAvatars] = useState<Object[]>([])
 
   const displayAvatar = () => {
@@ -17,6 +18,8 @@ export default function SetPlayer ({submitName, submitUrl, gameState}: playerPro
   }
 
   function emit(payload, type) {
+    if (type === "bot") submitBot(payload);
+
     type === "name" ? submitName(payload) : submitUrl(payload);
   }
 
@@ -34,7 +37,10 @@ export default function SetPlayer ({submitName, submitUrl, gameState}: playerPro
        <div className="flex justify-center items-start h-screen">
         {!displayAvatar() &&<SelectName submitName={(payload) => emit(payload, "name")} />}
 
-        { displayAvatar() && <SelectAvatar avatars={avatars} submitUrl={(payload) => emit(payload, "avatar")}/>}
+        { displayAvatar() && <SelectAvatar
+                                avatars={avatars}
+                                submitBot={(payload) => emit(payload, "bot")}
+                                submitUrl={(payload) => emit(payload, "avatar")}/>}
 
        </div>
       </>

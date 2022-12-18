@@ -1,6 +1,18 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
-export default function PlayerVue ({}) {
+type PlayerProps = {
+  player: {
+    name: String,
+    frontUrl: String,
+    backUrl: String
+  }
+}
+
+export default function PlayerVue ({player}: PlayerProps) {
+
+  useEffect(() => {
+    console.log(player)
+  })
 
     return (
       <>
