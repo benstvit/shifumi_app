@@ -15,10 +15,17 @@ export default function SelectAvatar({submitUrl, avatars}: Props) {
     }
   }
 
+  function selected(event) {
+    document.querySelectorAll('img').forEach(e => {
+      e.style.filter = "saturate(55%)";
+    })
+    event.target.style.filter = "saturate(1.2)";
+  }
+
   function displayImages() {
-    return avatars.map(avatar => {
+    return avatars.map((avatar, index) => {
       return <span onClick={setPlayerAvatar} key={avatar.id}>
-        <img className="h-52 w-52 col-span-2 p-4 hover:cursor-pointer" src={avatar.frontUrl} alt={avatar.id} data-backurl={avatar.backUrl}/>
+        <img onClick={selected} className="avatar-selector avatar-default h-48 w-48" src={avatar.frontUrl} alt={avatar.id} data-backurl={avatar.backUrl}/>
         </span>
     })
   }
@@ -36,19 +43,20 @@ export default function SelectAvatar({submitUrl, avatars}: Props) {
   return (
     <>
       <form
-        className="flex flex-col justify-center items-center bg-gray-100 rounded-md p-24 shadow-md mt-24"
+        className="flex flex-col justify-center items-center bg-gray-100 rounded-md p-12 mx-12 h-fit w-5/6 shadow-md mt-24"
         onSubmit={submitResults}>
-        <label className="block font-game text-xl font-bold text-gray-900 dark:text-white mb-4">
-          SELECT AVATAR
-        </label>
-        <div className="grid grid-cols-4">
-          {displayImages()}
-        </div>
-        <input
-        className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-400 cursor-pointer hover:border-blue-500 rounded"
-        type="submit"
-        value="Submit Avatar Choice"
-        />
+          <label className="block font-game text-xl font-bold text-gray-900 dark:text-white mb-4">
+            SELECT AVATAR
+          </label>
+          <div
+            className="flex flex-wrap justify-between items-center gap-12">
+            {displayImages()}
+          </div>
+          <input
+          className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-400 cursor-pointer hover:border-blue-500 rounded"
+          type="submit"
+          value="Submit Avatar Choice"
+          />
       </form>
     </>
 

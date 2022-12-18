@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.avatar-selector:hover {
+  display: flex;
+  transition:all;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  filter: saturate(130%)
+}
+
+.avatar-default {
+  filter: saturate(50%)
+}

@@ -31,7 +31,7 @@ export default function SetPlayer ({submitName, submitUrl, gameState}: playerPro
 
   return (
       <>
-       <div className="h-screen w-full flex justify-center items-start">
+       <div className="flex justify-center items-start h-screen">
         {!displayAvatar() &&<SelectName submitName={(payload) => emit(payload, "name")} />}
 
         { displayAvatar() && <SelectAvatar avatars={avatars} submitUrl={(payload) => emit(payload, "avatar")}/>}
