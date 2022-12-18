@@ -1,32 +1,74 @@
-import React, {Component} from 'react'
+import {useEffect, useState} from 'react'
 import Arena from './containers/Arena';
-import SetPlayer from './components/SetPlayer/SetPlayer';
+import Banner from './components/shared/Banner';
+import SetGame from './components/SetPlayer/SetGame';
 
-type Player = {
+
+interface GameState {
   player: {
     name: String,
-    url: String
+    frontUrl: String,
+    backUrl: String
+  },
+  bot: {
+    frontUrl: String
   }
 }
 
-export default class App extends Component<{}, Player> {
-  state: Player = {
+export default function App() {
+  const state: GameState = {
     player: {
       name: '',
-      url: ''
+      frontUrl: '',
+      backUrl: ''
+    },
+    bot: {
+      frontUrl: '',
     }
   }
 
-  setPlayer(payload ) {
-    console.log(payload);
+  const [GameState, setGameState] = useState<GameState>(state)
+
+  const displaySetPlayer = () => {
+    return !GameState.player.name || !GameState.player.frontUrl;
   }
 
-  render() {
+  const displayArena = () => {
+    return GameState.player.backUrl !== '' && GameState.bot.frontUrl !== '';
+  }
+
+  function setBot(payload) {
+    console.log(displayArena())
+    const actualBotState = {...GameState.bot }
+    const newState = { ...GameState, bot: { ...actualBotState, frontUrl: payload } }
+    setGameState(newState)
+    console.log(displayArena())
+  }
+
+  function setPlayer(payload, type) {
+    const actualPlayerState = {...GameState.player }
+    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload.frontUrl, backUrl: payload.backUrl} } ;
+    setGameState(newState)
+  }
+
+  if (displaySetPlayer()) {
     return (
       <>
-        <SetPlayer submit={(payload) => this.setPlayer.bind(this, payload)} />
-        <Arena />
+        {displaySetPlayer() && <SetGame
+          submitBot={(payload) => setBot(payload)}
+          submitName={(payload) => setPlayer(payload, 'name')}
+          submitUrl={(payload) => setPlayer(payload, 'avatar')}
+          gameState={GameState} />}
+      </>
+    )
+  } else {
+    return (
+      <>
+        <div className="flex justify-center items-start h-screen bg-gray-100">
+          {displayArena() && <Arena gameState={GameState} />}
+        </div>
       </>
     )
   }
+
 }

@@ -1,12 +1,21 @@
-import React, {Component} from 'react'
+import {useState, useEffect} from 'react'
 
-export class PlayerVue extends Component {
-  state = {}
+type PlayerProps = {
+  player: {
+    name: String,
+    frontUrl: String,
+    backUrl: String
+  }
+}
 
-  render () {
+export default function PlayerVue ({player}: PlayerProps) {
+
+  useEffect(() => {
+    console.log(player)
+  })
+
     return (
       <>
       </>
     )
   }
-}
