@@ -29,7 +29,7 @@ export default function App() {
 
   function setPlayer(payload, type) {
     const actualPlayerState = {...GameState.player }
-    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload} } ;
+    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload.frontUrl, backUrl: payload.backUrl} } ;
     console.log(newState);
     setGameState(newState)
   }

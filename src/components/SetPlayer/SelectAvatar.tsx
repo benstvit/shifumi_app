@@ -11,23 +11,25 @@ export default function SelectAvatar({submitUrl, avatars}: Props) {
     player: {
       name: '',
       frontUrl: '',
+      backUrl: ''
     }
   }
 
   function displayImages() {
     return avatars.map(avatar => {
       return <span onClick={setPlayerAvatar} key={avatar.id}>
-        <img className="h-52 w-52 col-span-2 p-4 hover:cursor-pointer" src={avatar.imageUrl} alt={avatar.id}/>
+        <img className="h-52 w-52 col-span-2 p-4 hover:cursor-pointer" src={avatar.frontUrl} alt={avatar.id} data-backurl={avatar.backUrl}/>
         </span>
     })
   }
 
   function setPlayerAvatar(event) {
     player.player.frontUrl = event.target.src;
+    player.player.backUrl = event.target.getAttribute("data-backurl");
   }
 
   function submitResults(event) {
-    submitUrl(player.player.frontUrl);
+    submitUrl(player.player);
     event.preventDefault();
   }
 

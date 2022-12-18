@@ -15,8 +15,9 @@ export const GetAvatars = () => {
 
     randomId().forEach(async (id, index) => {
       await getAPI(id).then((results) => {
-        const url = results.data.sprites.versions["generation-v"]["black-white"].front_default;
-        avatars.push({id: index, imageUrl: url});
+        const frontUrl = results.data.sprites.versions["generation-v"]["black-white"].front_default;
+        const backUrl = results.data.sprites.versions["generation-v"]["black-white"].back_default;
+        avatars.push({id: index, frontUrl: frontUrl, backUrl: backUrl});
       });
     })
     isLoading = false;
