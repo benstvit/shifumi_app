@@ -6,27 +6,20 @@ import SelectName from './SelectName'
 type playerProps = {
   submitName: any,
   submitUrl: any,
-  playerState: Object
+  gameState: Object
 }
 
-export default function SetPlayer ({submitName, submitUrl, playerState}: playerProps) {
+export default function SetPlayer ({submitName, submitUrl, gameState}: playerProps) {
   const [avatars, setAvatars] = useState<Object[]>([])
 
   const displayAvatar = () => {
-    return playerState["player"].name && avatars?.length > 0;
-  }
-  // function setUrl(event) {
-  //   console.log(event)
-  //   console.log(avatars);
-  // }
-
-  function emitName(payload) {
-    submitName(payload);
+    return gameState["player"].name && avatars?.length > 0;
   }
 
-  function emitUrl(payload) {
-    submitUrl(payload);
+  function emit(payload, type) {
+    type === "name" ? submitName(payload) : submitUrl(payload);
   }
+
 
   useEffect(() => {
     async function fetchAvatars() {
@@ -39,9 +32,9 @@ export default function SetPlayer ({submitName, submitUrl, playerState}: playerP
   return (
       <>
        <div className="h-screen w-full flex justify-center items-start">
-        {!displayAvatar() &&<SelectName submitName={(payload) => emitName(payload)} />}
+        {!displayAvatar() &&<SelectName submitName={(payload) => emit(payload, "name")} />}
 
-        { displayAvatar() && <SelectAvatar avatars={avatars} submitUrl={(payload) => emitUrl(payload)}/>}
+        { displayAvatar() && <SelectAvatar avatars={avatars} submitUrl={(payload) => emit(payload, "avatar")}/>}
 
        </div>
       </>

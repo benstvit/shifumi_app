@@ -9,24 +9,25 @@ export default function SelectAvatar({submitUrl, avatars}: Props) {
 
   const player = {
     player: {
-      name: "",
-      url: ""
+      name: '',
+      frontUrl: '',
     }
   }
 
   function displayImages() {
     return avatars.map(avatar => {
-      return <span onClick={setPlayerAvatar} key={avatar.id}><img className="h-52 w-52 col-span-2 p-4 hover:cursor-pointer" src={avatar.imageUrl} alt={avatar.id}/></span>
+      return <span onClick={setPlayerAvatar} key={avatar.id}>
+        <img className="h-52 w-52 col-span-2 p-4 hover:cursor-pointer" src={avatar.imageUrl} alt={avatar.id}/>
+        </span>
     })
   }
 
   function setPlayerAvatar(event) {
-    player.player.url = event.target.src;
-    console.log(player);
+    player.player.frontUrl = event.target.src;
   }
 
   function submitResults(event) {
-    submitUrl(player.player.url);
+    submitUrl(player.player.frontUrl);
     event.preventDefault();
   }
 

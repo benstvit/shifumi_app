@@ -4,40 +4,52 @@ import Banner from './components/shared/Banner';
 import SetPlayer from './components/SetPlayer/SetPlayer';
 
 
-interface PlayerState {
+interface GameState {
   player: {
     name: String,
-    url: String
+    frontUrl: String,
+    backUrl: String
   }
 }
 
 export default function App() {
-  const player: PlayerState = {
+  const state: GameState = {
     player: {
       name: '',
-      url: ''
+      frontUrl: '',
+      backUrl: ''
     }
   }
 
-  const [playerState, setPlayerState] = useState<PlayerState>(player)
+  const [GameState, setGameState] = useState<GameState>(state)
 
-  function setPlayerName(payload) {
-    console.log(payload);
-    setPlayerState({player: {...player.player, name:payload}})
-  }
-  function setPlayerAvatar(payload) {
-    setPlayerState({player: {...player.player, url: payload}})
+  const displaySetPlayer = () => {
+    return !GameState.player.name || !GameState.player.frontUrl;
   }
 
-  return (
-    <>
-      <Banner />
-      <SetPlayer
-        submitName={(payload) => setPlayerName(payload)}
-        submitUrl={(payload) => setPlayerAvatar(payload)}
-        playerState={playerState} />
-      <Arena />
-    </>
-  )
+  function setPlayer(payload, type) {
+    const actualPlayerState = {...GameState.player }
+    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload} } ;
+    console.log(newState);
+    setGameState(newState)
+  }
+
+  if (displaySetPlayer()) {
+    return (
+      <>
+        <Banner />
+        {displaySetPlayer() && <SetPlayer
+          submitName={(payload) => setPlayer(payload, 'name')}
+          submitUrl={(payload) => setPlayer(payload, 'avatar')}
+          gameState={GameState} />}
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Arena />
+      </>
+    )
+  }
 
 }
