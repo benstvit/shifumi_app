@@ -16,7 +16,7 @@ type ArenaProps = {
       choice: string
     }
   },
-  setChoices: any,
+  setChoices: Function,
 }
 
 
@@ -44,7 +44,9 @@ export default function Arena({gameState, setChoices }: ArenaProps) {
             {gameState.bot &&<BotVue gameState={gameState} />}
           </div>
           <div className="flex items-start m-4 bg-gradient-to-r from-blue-300 to-blue-50">
-            <PlayerVue  player={gameState.player} choice={(payload) => setChoice(payload)} />
+            <PlayerVue
+              player={gameState.player}
+              choice={(payload) => setChoice(payload)} />
           </div>
         </div>
 

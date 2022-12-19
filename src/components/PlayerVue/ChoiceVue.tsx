@@ -32,7 +32,6 @@ export default function ChoiceVue ({choice}: {choice: any}) {
               </div>
             )
           })}
-
         </div>
       </>
     )

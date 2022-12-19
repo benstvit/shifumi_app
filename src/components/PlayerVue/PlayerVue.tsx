@@ -9,7 +9,7 @@ type PlayerProps = {
     hasPlayed: Boolean,
     choice: string
   },
-  choice: any
+  choice: Function,
 }
 
 export default function PlayerVue ({player, choice}: PlayerProps) {
@@ -38,7 +38,7 @@ export default function PlayerVue ({player, choice}: PlayerProps) {
             </div>
           </div>
           <div className='flex justify-center items-center col-span-4'>
-            <ChoiceVue choice={payload => setChoice(payload)}  />
+            <ChoiceVue choice={payload => setChoice(payload)}/>
           </div>
         </div>
       </>
