@@ -39,7 +39,7 @@ export default function Arena({gameState, setChoices }: ArenaProps) {
 
     return (
       <>
-        <div className="w-2/3 h-full rounded-lg shadow-lg bg-white">
+        <div className="mx-auto w-2/3 mt-10 rounded-lg shadow-lg bg-white">
           <div className="flex items-start justify-between m-4 bg-gradient-to-l from-red-300 to-red-50">
             {gameState.bot &&<BotVue gameState={gameState} />}
           </div>
