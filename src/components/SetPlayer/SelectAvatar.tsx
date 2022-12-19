@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 
 type Props = {
+  avatars: any,
+  playerName: string
   submitUrl: Function,
-  avatars: any
 }
 
-export default function SelectAvatar({submitUrl, avatars}: Props) {
+export default function SelectAvatar({avatars, playerName, submitUrl}: Props) {
 
   const data = {
     player: {
@@ -55,8 +56,8 @@ export default function SelectAvatar({submitUrl, avatars}: Props) {
       <form
         className="flex flex-col justify-center items-center bg-gray-100 rounded-md p-12 mx-12 h-fit w-5/6 shadow-md mt-24"
         onSubmit={submitResults}>
-          <label className="block font-game text-xl font-bold text-gray-900 dark:text-white mb-4">
-            SELECT AVATAR
+          <label className="block font-game uppercase text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Please select your avatar, {playerName}
           </label>
           <div
             className="flex flex-wrap justify-between items-center gap-12">

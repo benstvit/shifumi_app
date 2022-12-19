@@ -24,28 +24,24 @@ export default function BotVue ({gameState}: BotProps) {
 
   const displayEvents = () => {
     if (!gameState.player.hasPlayed) return "Players are preparing their move...";
-    console.log(gameState);
+    if (botChoice === playerChoice) return "It's a tie! Play again"
+
     if (gameEnd()) {
       switch (playerChoice) {
         case "rock":
-          return botChoice === "paper" ? "Shifumi Master wrapped the game! You lose!" : "Shifumi Master needs a new pair of scissors! You win!";
-          break;
+          return botChoice === "paper" ? "Shifumi Master wrapped the game with paper! You lose!" : "Shifumi Master needs a new pair of scissors! You win!";
         case "paper":
-          return botChoice === "scissors" ? "Shifumi Master chopped your paper sheet off! You lose!" : "You wraped up the game with success! You win!"
-          break;
+          return botChoice === "scissors" ? "Shifumi Master chopped your paper sheet off! You lose!" : "You wrapped up the game with success! You win!"
         default:
-          return botChoice === "rock" ? "Looks like Shifumi Master does not like scissors! You lose" : "This was a sharp move! You win!"
-          break;
+          return botChoice === "rock" ? "Looks like Shifumi Master has a grudge against scissors! You lose" : "This was a sharp move! You win!"
       }
     }
   }
 
   const emoticon = () => {
-    console.log(gameEnd())
-    // if (gameState.player.hasPlayed && gameState.bot.choice)
-    // if (index === 0) return '✊';
+    if (!gameEnd()) return null;
 
-    // return index === 1 ? '✋' : '✌️';
+    return botChoice === 'rock' ? '✊' : (botChoice === 'paper' ? '✋' : '✌️');
   }
 
   function displayAvatar() {
@@ -59,16 +55,18 @@ export default function BotVue ({gameState}: BotProps) {
         <div className='items-start justify-start bg-white opacity-90 border-black border-2 rounded-md font-game w-1/3 m-4 px-4 py-2'>
           {displayEvents()}
         </div>
-       <div className="flex flex-col items-center p-4">
+       <div className="flex flex-col items-center justify-center p-4">
           <div>
-            <h2 className="font-game px-4 py-2 bg-blue-400 rounded-md shadow-lg text-xl text-white font-bold uppercase">
+            <h2 className="font-game px-4 py-2 bg-white rounded-md shadow-lg text-xl text-slate-800 font-bold uppercase">
               Shifumi Master
             </h2>
           </div>
-          <div>
-              {displayAvatar()}
+          <div className="flex justify-between items-center">
+            {emoticon() && <div className='flex items-center justify-center bg-white border-gray-800 shadow-md border-2 w-24 h-24 rounded-full'>
+              <h1 className='text-4xl'>{emoticon()}</h1>
+            </div>}
+            {displayAvatar()}
           </div>
-          <p>{emoticon()}</p>
         </div>
       </>
     )

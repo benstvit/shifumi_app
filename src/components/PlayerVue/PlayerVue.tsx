@@ -29,7 +29,7 @@ export default function PlayerVue ({player, choice}: PlayerProps) {
         <div className='grid grid-cols-6'>
           <div className="flex flex-col items-center col-span-2 p-4">
             <div>
-              <h2 className="font-game px-2 py-2 border-black border-2 bg-white opacity-80 rounded-lg shadow-lg text-xl text-slate-800 font-bold uppercase">
+              <h2 className="font-game px-4 py-2 border-black border-2 bg-white opacity-90 rounded-lg shadow-lg text-xl text-slate-800 font-bold uppercase">
                 {player.name}
               </h2>
             </div>

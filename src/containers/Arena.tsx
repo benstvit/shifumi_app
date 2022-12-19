@@ -27,7 +27,7 @@ export default function Arena({gameState, setChoices }: ArenaProps) {
   })
 
   const botChoice = () => {
-    const randomIndex = Math.floor(Math.random() * 3);
+    let randomIndex = Math.floor(Math.random() * 3);
     return ['rock', 'paper', 'scissors'][randomIndex];
   }
 
@@ -39,7 +39,7 @@ export default function Arena({gameState, setChoices }: ArenaProps) {
 
     return (
       <>
-        <div className="place-content-center w-2/3 h-full rounded-lg shadow-lg bg-white">
+        <div className="w-2/3 h-full rounded-lg shadow-lg bg-white">
           <div className="flex items-start justify-between m-4 bg-gradient-to-l from-red-300 to-red-50">
             {gameState.bot &&<BotVue gameState={gameState} />}
           </div>

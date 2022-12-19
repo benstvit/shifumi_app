@@ -6,14 +6,18 @@ import SelectName from './SelectName'
 type playerProps = {
   submitName: any,
   submitUrl: any,
-  gameState: Object
+  gameState: {
+    player: {
+      name: string
+    }
+  }
 }
 
 export default function SetGame ({submitName, submitUrl, gameState}: playerProps) {
   const [avatars, setAvatars] = useState<Object[]>([])
 
   const displayAvatar = () => {
-    return gameState["player"].name && avatars?.length > 0;
+    return gameState.player.name && avatars?.length > 0;
   }
 
   function emit(payload, type) {
@@ -35,6 +39,7 @@ export default function SetGame ({submitName, submitUrl, gameState}: playerProps
         {!displayAvatar() &&<SelectName submitName={(payload) => emit(payload, "name")} />}
 
         { displayAvatar() && <SelectAvatar
+                                playerName={gameState.player.name}
                                 avatars={avatars}
                                 submitUrl={(payload) => emit(payload, "avatar")}/>}
 
