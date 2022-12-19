@@ -1,18 +1,18 @@
 import {useState, useEffect} from 'react'
+import ChoiceVue from './ChoiceVue'
 
 type PlayerProps = {
   player: {
     name: string,
     frontUrl: string,
-    backUrl: string
-  }
+    backUrl: string,
+    hasPlayed: Boolean,
+    choice: string
+  },
+  choice: any
 }
 
-export default function PlayerVue ({player}: PlayerProps) {
-
-  useEffect(() => {
-    console.log(player)
-  })
+export default function PlayerVue ({player, choice}: PlayerProps) {
 
   function displayAvatar() {
     return <span>
@@ -20,14 +20,25 @@ export default function PlayerVue ({player}: PlayerProps) {
       </span>
   }
 
+  function setChoice(payload) {
+    choice(payload);
+  }
+
     return (
       <>
-        <div className="flex flex-col items-center p-4">
-          <div>
-            <h2 className="font-game px-4 py-2 bg-blue-500 rounded-md shadow-lg text-2xl text-black opacity-80 font-bold uppercase">{player.name}</h2>
+        <div className='grid grid-cols-6'>
+          <div className="flex flex-col items-center col-span-2 p-4">
+            <div>
+              <h2 className="font-game px-2 py-2 border-black border-2 bg-white opacity-80 rounded-lg shadow-lg text-xl text-slate-800 font-bold uppercase">
+                {player.name}
+              </h2>
+            </div>
+            <div>
+                {displayAvatar()}
+            </div>
           </div>
-          <div>
-              {displayAvatar()}
+          <div className='flex justify-center items-center col-span-4'>
+            <ChoiceVue choice={payload => setChoice(payload)}  />
           </div>
         </div>
       </>

@@ -11,7 +11,7 @@ export default function SelectAvatar({submitUrl, avatars}: Props) {
     player: {
       name: '',
       frontUrl: '',
-      backUrl: ''
+      backUrl: '',
     },
     bot: {
       frontUrl: ''

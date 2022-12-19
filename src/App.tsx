@@ -8,10 +8,13 @@ interface GameState {
   player: {
     name: string,
     frontUrl: string,
-    backUrl: string
+    backUrl: string,
+    hasPlayed: Boolean,
+    choice: string
   },
   bot: {
-    frontUrl: string
+    frontUrl: string,
+    choice: string
   }
 }
 
@@ -20,10 +23,13 @@ export default function App() {
     player: {
       name: '',
       frontUrl: '',
-      backUrl: ''
+      backUrl: '',
+      hasPlayed: false,
+      choice: ''
     },
     bot: {
       frontUrl: '',
+      choice: ''
     }
   }
 
@@ -37,11 +43,17 @@ export default function App() {
     return GameState.player.backUrl !== '' && GameState.bot.frontUrl !== '';
   }
 
+  function setChoices(payload) {
+    const actualPlayerState = {...GameState.player }
+    const actualBotState = {...GameState.bot};
+    const newState = { ...GameState, player: { ...actualPlayerState, hasPlayed: true, choice: payload.player.choice }, bot: {...actualBotState, choice: payload.bot.choice} };
+    setGameState(newState)
+  }
+
   function setPlayer(payload, type) {
     const actualPlayerState = {...GameState.player }
     const actualBotState = {...GameState.bot};
     const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload.player.frontUrl, backUrl: payload.player.backUrl}, bot: {...actualBotState, frontUrl: payload.bot.frontUrl} } ;
-    console.log(newState);
     setGameState(newState)
   }
 
@@ -57,8 +69,10 @@ export default function App() {
   } else {
     return (
       <>
-        <div className="flex justify-center items-center my-auto mx-auto h-full">
-          {displayArena() && <Arena gameState={GameState} />}
+        <div className="flex justify-center items-center">
+          {displayArena() && <Arena
+                                gameState={GameState}
+                                setChoices={(payload) => setChoices(payload)} />}
         </div>
       </>
     )
