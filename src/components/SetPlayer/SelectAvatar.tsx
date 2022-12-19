@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 
 type Props = {
-  submitBot: Function,
   submitUrl: Function,
   avatars: any
 }
 
-export default function SelectAvatar({submitBot, submitUrl, avatars}: Props) {
+export default function SelectAvatar({submitUrl, avatars}: Props) {
 
   const data = {
     player: {

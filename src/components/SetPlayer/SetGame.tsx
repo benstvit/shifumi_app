@@ -4,13 +4,12 @@ import SelectAvatar from './SelectAvatar'
 import SelectName from './SelectName'
 
 type playerProps = {
-  submitBot: any,
   submitName: any,
   submitUrl: any,
   gameState: Object
 }
 
-export default function SetGame ({submitBot, submitName, submitUrl, gameState}: playerProps) {
+export default function SetGame ({submitName, submitUrl, gameState}: playerProps) {
   const [avatars, setAvatars] = useState<Object[]>([])
 
   const displayAvatar = () => {
@@ -18,8 +17,6 @@ export default function SetGame ({submitBot, submitName, submitUrl, gameState}: 
   }
 
   function emit(payload, type) {
-    if (type === "bot") submitBot(payload);
-
     type === "name" ? submitName(payload) : submitUrl(payload);
   }
 
@@ -39,7 +36,6 @@ export default function SetGame ({submitBot, submitName, submitUrl, gameState}: 
 
         { displayAvatar() && <SelectAvatar
                                 avatars={avatars}
-                                submitBot={(payload) => emit(payload, "bot")}
                                 submitUrl={(payload) => emit(payload, "avatar")}/>}
 
        </div>

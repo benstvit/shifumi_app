@@ -6,12 +6,12 @@ import SetGame from './components/SetPlayer/SetGame';
 
 interface GameState {
   player: {
-    name: String,
-    frontUrl: String,
-    backUrl: String
+    name: string,
+    frontUrl: string,
+    backUrl: string
   },
   bot: {
-    frontUrl: String
+    frontUrl: string
   }
 }
 
@@ -37,14 +37,6 @@ export default function App() {
     return GameState.player.backUrl !== '' && GameState.bot.frontUrl !== '';
   }
 
-  function setBot(payload) {
-    console.log(displayArena())
-    const actualBotState = {...GameState.bot }
-    const newState = { ...GameState, bot: { ...actualBotState, frontUrl: payload } }
-    setGameState(newState)
-    console.log(displayArena())
-  }
-
   function setPlayer(payload, type) {
     const actualPlayerState = {...GameState.player }
     const actualBotState = {...GameState.bot};
@@ -57,7 +49,6 @@ export default function App() {
     return (
       <>
         {displaySetPlayer() && <SetGame
-          submitBot={(payload) => setBot(payload)}
           submitName={(payload) => setPlayer(payload, 'name')}
           submitUrl={(payload) => setPlayer(payload, 'avatar')}
           gameState={GameState} />}

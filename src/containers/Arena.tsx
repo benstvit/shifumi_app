@@ -5,9 +5,9 @@ import PlayerVue from '../components/PlayerVue/PlayerVue'
 type ArenaProps = {
   gameState: {
     player: {
-      name: String,
-      frontUrl: String,
-      backUrl: String
+      name: string,
+      frontUrl: string,
+      backUrl: string
     },
     bot: {
       frontUrl: String
