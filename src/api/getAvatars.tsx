@@ -5,7 +5,7 @@ export let isLoading = true;
 function randomId() {
   const nums: number[] = [];
   while(nums.length !== 8) {
-    nums.push(Math.floor(Math.random() * 100) + 1);
+    nums.push(Math.floor(Math.random() * 400) + 1);
   }
   return nums;
 }

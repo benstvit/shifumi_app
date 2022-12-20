@@ -1,17 +1,17 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import Arena from './containers/Arena';
-import Banner from './components/shared/Banner';
-import SetGame from './components/SetPlayer/SetGame';
-
-
+import SetGame from './components/SetGame/SetGame';
 interface GameState {
   player: {
-    name: String,
-    frontUrl: String,
-    backUrl: String
+    name: string,
+    frontUrl: string,
+    backUrl: string,
+    hasPlayed: Boolean,
+    action: string
   },
   bot: {
-    frontUrl: String
+    frontUrl: string,
+    action: string
   }
 }
 
@@ -20,14 +20,20 @@ export default function App() {
     player: {
       name: '',
       frontUrl: '',
-      backUrl: ''
+      backUrl: '',
+      hasPlayed: false,
+      action: ''
     },
     bot: {
       frontUrl: '',
+      action: ''
     }
   }
 
   const [GameState, setGameState] = useState<GameState>(state)
+
+  const actualPlayerState = {...GameState.player }
+  const actualBotState = {...GameState.bot};
 
   const displaySetPlayer = () => {
     return !GameState.player.name || !GameState.player.frontUrl;
@@ -37,38 +43,48 @@ export default function App() {
     return GameState.player.backUrl !== '' && GameState.bot.frontUrl !== '';
   }
 
-  function setBot(payload) {
-    console.log(displayArena())
-    const actualBotState = {...GameState.bot }
-    const newState = { ...GameState, bot: { ...actualBotState, frontUrl: payload } }
+  function resetChoices() {
+    const newState = {...GameState, player: {...actualPlayerState, action: ''}, bot: {...actualBotState, action: ''}};
     setGameState(newState)
-    console.log(displayArena())
+  }
+
+  function resetGame() {
+    const newState = {player: {name:'', frontUrl:'', backUrl:'', hasPlayed: false, action: ''}, bot: {frontUrl: '', action: ''}};
+    setGameState(newState);
+  }
+
+  function setChoices(payload) {
+    const newState = { ...GameState, player: { ...actualPlayerState, hasPlayed: true, action: payload.player.action }, bot: {...actualBotState, action: payload.bot.action} };
+    setGameState(newState)
+    setTimeout(() => {
+      resetChoices();
+    }, 2500);
   }
 
   function setPlayer(payload, type) {
-    const actualPlayerState = {...GameState.player }
-    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload.frontUrl, backUrl: payload.backUrl} } ;
+    const newState = type === 'name' ? { ...GameState, player: { ...actualPlayerState, name: payload} } : { ...GameState, player: { ...actualPlayerState, frontUrl: payload.player.frontUrl, backUrl: payload.player.backUrl}, bot: {...actualBotState, frontUrl: payload.bot.frontUrl} } ;
     setGameState(newState)
   }
 
-  if (displaySetPlayer()) {
-    return (
-      <>
-        {displaySetPlayer() && <SetGame
-          submitBot={(payload) => setBot(payload)}
-          submitName={(payload) => setPlayer(payload, 'name')}
-          submitUrl={(payload) => setPlayer(payload, 'avatar')}
-          gameState={GameState} />}
-      </>
-    )
-  } else {
-    return (
-      <>
-        <div className="flex justify-center items-start h-screen bg-gray-100">
-          {displayArena() && <Arena gameState={GameState} />}
-        </div>
-      </>
-    )
-  }
+  return (
+    <>
+      {displaySetPlayer() && <SetGame
+        submitName={(payload) => setPlayer(payload, 'name')}
+        submitUrl={(payload) => setPlayer(payload, 'avatar')}
+        gameState={GameState} />}
 
+      <div className="flex justify-between items-center">
+        {displayArena() && <Arena gameState={GameState} setChoices={(payload) => setChoices(payload)} />}
+
+        <div className='mx-auto'>
+          {GameState.player.backUrl && GameState.bot.frontUrl &&
+          <button
+            className='uppercase bg-black text-white opacity-90 border-black border-2 rounded-md font-game hover:scale-150 hover:bg-white hover:text-black m-4 px-4 py-2'
+            onClick={resetGame}>
+            Reset Game
+          </button>}
+        </div>
+      </div>
+    </>
+  )
 }

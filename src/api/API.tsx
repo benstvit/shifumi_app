@@ -1,5 +1,4 @@
 import axios from 'axios'
-
 interface Params {
     baseUrl: string
     headers : any
