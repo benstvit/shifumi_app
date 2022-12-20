@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-export default function ChoiceVue ({choice}: {choice: any}) {
+export default function ChoiceVue ({choice, player}: {choice: any, player: any}) {
 
   const choices = ['rock', 'paper', 'scissors'];
 
@@ -16,7 +16,7 @@ export default function ChoiceVue ({choice}: {choice: any}) {
     return (
       <>
         <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center w-full h-1/3 ml-12 lg:ml-24">
-          {choices.map((choice, index) => {
+          {!player.choice && choices.map((choice, index) => {
             return (
               <div className='flex flex-col justify-center' key={index}>
                 <h1 className="text-4xl hidden lg:block">
