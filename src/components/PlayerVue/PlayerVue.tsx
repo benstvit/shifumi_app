@@ -1,28 +1,21 @@
-import {useState, useEffect} from 'react'
 import ChoiceVue from './ChoiceVue'
 
 type PlayerProps = {
   player: {
     name: string,
-    frontUrl: string,
     backUrl: string,
-    hasPlayed: Boolean,
-    choice: string
+    action: string,
   },
   choice: Function,
 }
 
 export default function PlayerVue ({player, choice}: PlayerProps) {
 
-  function displayAvatar() {
-    return <span>
-        <img className="h-60 w-60" src={player.backUrl} alt="player-avatar" />
-      </span>
-  }
-
-  function setChoice(payload) {
-    choice(payload);
-  }
+    function displayAvatar() {
+      return <span>
+          <img className="h-60 w-60" src={player.backUrl} alt="player-avatar" />
+        </span>
+    }
 
     return (
       <>
@@ -34,11 +27,11 @@ export default function PlayerVue ({player, choice}: PlayerProps) {
               </h2>
             </div>
             <div>
-                {displayAvatar()}
+              {displayAvatar()}
             </div>
           </div>
           <div className='flex justify-center items-center col-span-4'>
-            <ChoiceVue choice={payload => setChoice(payload)} player={player}/>
+            <ChoiceVue choice={payload => choice(payload)} player={player}/>
           </div>
         </div>
       </>

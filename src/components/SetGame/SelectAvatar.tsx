@@ -27,7 +27,7 @@ export default function SelectAvatar({avatars, playerName, submitUrl}: Props) {
   }
 
   function displayImages() {
-    return avatars.map((avatar, index) => {
+    return avatars.map((avatar) => {
       return <span onClick={setPlayerAvatar} key={avatar.id}>
         <img onClick={selected} className="avatar-selector avatar-default h-48 w-48" src={avatar.frontUrl} alt={avatar.id} data-backurl={avatar.backUrl}/>
         </span>
@@ -60,13 +60,13 @@ export default function SelectAvatar({avatars, playerName, submitUrl}: Props) {
             Please select your avatar, {playerName}
           </label>
           <div
-            className="flex flex-wrap justify-between items-center gap-12">
+            className="flex flex-wrap justify-between items-center gap-12 my-6">
             {displayImages()}
           </div>
           <input
-          className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-400 cursor-pointer hover:border-blue-500 rounded"
-          type="submit"
-          value="Submit Avatar Choice"
+            className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-4 px-4 border-b-4 border-blue-500 cursor-pointer hover:border-blue-700 rounded-md"
+            type="submit"
+            value="Submit Avatar Choice"
           />
       </form>
     </>

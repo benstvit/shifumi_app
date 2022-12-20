@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react'
 import BotVue from '../components/BotVue/BotVue'
 import PlayerVue from '../components/PlayerVue/PlayerVue'
 
@@ -9,33 +8,28 @@ type ArenaProps = {
       frontUrl: string,
       backUrl: string,
       hasPlayed: Boolean,
-      choice: string
+      action: string
     },
     bot: {
       frontUrl: string,
-      choice: string
+      action: string
     }
   },
   setChoices: Function,
 }
 
-
 export default function Arena({gameState, setChoices }: ArenaProps) {
 
-  useEffect(() => {
-    console.log(gameState);
-  })
+    const botChoice = () => {
+      let randomIndex = Math.floor(Math.random() * 3);
+      return ['rock', 'paper', 'scissors'][randomIndex];
+    }
 
-  const botChoice = () => {
-    let randomIndex = Math.floor(Math.random() * 3);
-    return ['rock', 'paper', 'scissors'][randomIndex];
-  }
-
-  function setChoice(payload) {
-    gameState.player.choice = payload;
-    gameState.bot.choice = botChoice();
-    setChoices(gameState);
-  }
+    function setChoice(payload) {
+      gameState.player.action = payload;
+      gameState.bot.action = botChoice();
+      setChoices(gameState);
+    }
 
     return (
       <>
@@ -49,7 +43,6 @@ export default function Arena({gameState, setChoices }: ArenaProps) {
               choice={(payload) => setChoice(payload)} />
           </div>
         </div>
-
       </>
     )
   }
