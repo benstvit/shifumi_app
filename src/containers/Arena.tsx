@@ -33,11 +33,11 @@ export default function Arena({gameState, setChoices }: ArenaProps) {
 
     return (
       <>
-        <div className="mx-auto w-2/3 mt-10 rounded-lg shadow-lg bg-white">
-          <div className="flex items-start justify-between m-4 bg-gradient-to-l from-red-300 to-red-50">
+        <div className="mx-auto w-full my-0 lg:w-2/3 lg:my-2 rounded-lg shadow-lg bg-white h-full">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between m-4 bg-gradient-to-l from-red-300 to-red-50 h-1/2">
             {gameState.bot &&<BotVue gameState={gameState} />}
           </div>
-          <div className="flex items-start m-4 bg-gradient-to-r from-blue-300 to-blue-50">
+          <div className="flex items-center justify-center lg:items-start m-4 bg-gradient-to-r from-blue-300 to-blue-50 h-1/2">
             <PlayerVue
               player={gameState.player}
               choice={(payload) => setChoice(payload)} />

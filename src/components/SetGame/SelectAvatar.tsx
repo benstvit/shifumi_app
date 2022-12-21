@@ -29,7 +29,7 @@ export default function SelectAvatar({avatars, playerName, submitUrl}: Props) {
   function displayImages() {
     return avatars.map((avatar) => {
       return <span onClick={setPlayerAvatar} key={avatar.id}>
-        <img onClick={selected} className="avatar-selector avatar-default h-48 w-48" src={avatar.frontUrl} alt={avatar.id} data-backurl={avatar.backUrl}/>
+        <img onClick={selected} className="avatar-selector avatar-default h-24 w-24 lg:h-48 lg:w-48" src={avatar.frontUrl} alt={avatar.id} data-backurl={avatar.backUrl}/>
         </span>
     })
   }
@@ -60,7 +60,7 @@ export default function SelectAvatar({avatars, playerName, submitUrl}: Props) {
             Please select your avatar, {playerName}
           </label>
           <div
-            className="flex flex-wrap justify-between items-center gap-12 my-6">
+            className="flex flex-wrap justify-between items-center lg:gap-12 my-6">
             {displayImages()}
           </div>
           <input

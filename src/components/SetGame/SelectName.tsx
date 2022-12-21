@@ -20,7 +20,7 @@ export default function SelectName({submitName}: {submitName: any}) {
   return (
     <>
       <form
-        className="flex flex-col justify-center items-center bg-gray-100 rounded-md p-24 shadow-md mt-24"
+        className="flex flex-col justify-center items-center bg-gray-100 rounded-md p-24 shadow-md mx-6 lg:mx-0 mt-24"
         onSubmit={submitResults}
         >
         <label className="block font-game text-xl font-bold text-gray-900 dark:text-white mb-4">
