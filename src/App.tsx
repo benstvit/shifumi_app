@@ -58,7 +58,7 @@ export default function App() {
     setGameState(newState)
     setTimeout(() => {
       resetChoices();
-    }, 2500);
+    }, 2600);
   }
 
   function setPlayer(payload, type) {
@@ -73,7 +73,7 @@ export default function App() {
         submitUrl={(payload) => setPlayer(payload, 'avatar')}
         gameState={GameState} />}
 
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col lg:flex-row justify-between items-center">
         {displayArena() && <Arena gameState={GameState} setChoices={(payload) => setChoices(payload)} />}
 
         <div className='mx-auto'>
