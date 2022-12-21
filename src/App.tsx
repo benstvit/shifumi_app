@@ -58,7 +58,7 @@ export default function App() {
     setGameState(newState)
     setTimeout(() => {
       resetChoices();
-    }, 2500);
+    }, 2600);
   }
 
   function setPlayer(payload, type) {

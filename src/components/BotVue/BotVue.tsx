@@ -50,7 +50,7 @@ export default function BotVue ({gameState}: BotProps) {
 
     return (
       <>
-        <div className='items-start justify-start bg-white opacity-90 border-black border-2 rounded-md font-game w-3/4 lg:w-1/3 m-4 px-4 py-2'>
+        <div className='items-start justify-start bg-white opacity-90 border-black border-2 rounded-md font-game w-3/4 lg:w-1/3 m-2 lg:m-4 px-4 py-2'>
           {displayEvents()}
         </div>
         <div className="flex flex-col items-between justify-between p-4">
@@ -58,8 +58,8 @@ export default function BotVue ({gameState}: BotProps) {
             Shifumi Master
           </h2>
           <div className="flex flex-col lg:flex-row justify-center items-center">
-            <div className={`flex items-center justify-center ${emoticon() ? 'visible' : 'invisible'} hidden lg:block bg-white border-gray-800 shadow-md border-2 w-24 lg:h-24 rounded-full`}>
-              <h1 className='pt-5 text-4xl'>
+            <div className={`${emoticon() ? 'visible' : 'invisible'} relative hidden lg:block bg-white border-gray-800 shadow-md border-2 w-24 h-24 rounded-full`}>
+              <h1 className='absolute top-6 left-7 text-4xl'>
                 {emoticon()}
               </h1>
             </div>
