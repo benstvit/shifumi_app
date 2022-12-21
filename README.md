@@ -5,4 +5,4 @@ Notion link to structure : https://www.notion.so/7661fc07454342c9927e88501fcd7c6
 
 ## Before local use
 
-Don't forget to yarn !
+Don't forget to **yarn** !
